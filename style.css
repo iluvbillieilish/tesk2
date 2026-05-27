@@ -1,0 +1,150 @@
+/* 全域基礎設定 */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+}
+
+/* ==========================================
+   技術要求：導覽列 (Navbar) Flex 佈局
+   ========================================== */
+.navbar {
+  display: flex;                 /* 啟用 Flex 佈局 */
+  justify-content: space-between;/* 教授要求 1：左右拉開對齊 */
+  align-items: center;           /* 教授要求 2：垂直置中對齊 */
+  gap: 20px;                     /* 教授要求 3：元素間距 */
+  
+  background-color: #1a1a1a;
+  padding: 15px 4%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-logo {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* 導覽列選單也是一條 Flex 橡皮筋 */
+.nav-links {
+  display: flex;
+  justify-content: center;       /* 核心語法 */
+  align-items: center;           /* 核心語法 */
+  gap: 30px;                     /* 核心語法 */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #aaaaaa;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+.nav-cta {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.nav-cta:hover {
+  background-color: #0056b3;
+}
+
+/* ==========================================
+   技術要求：卡片列 (Card Row) Flex 佈局
+   ========================================== */
+.content-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.card-row {
+  display: flex;                 /* 啟用 Flex 佈局 */
+  justify-content: space-between;/* 教授要求 1：卡片左右均分對齊 */
+  align-items: stretch;          /* 教授要求 2：讓卡片高度自動拉到一樣高 */
+  gap: 24px;                     /* 教授要求 3：卡片之間的間距 */
+  
+  flex-direction: row;           /* 預設為橫排 */
+}
+
+/* 核心限制：子元素絕不使用固定寬度(如200px)，改用 flex-grow 或 % */
+.content-card {
+  flex-grow: 1;                  /* 核心語法：讓卡片平分剩餘空間，自動縮放 */
+  flex-basis: 0;                 /* 配合 flex-grow 達到完全等寬 */
+  
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;        /* 卡片內部文字也用 flex 由上往下排 */
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;             /* 防止圖片變形 */
+}
+
+.card-title {
+  font-size: 18px;
+  margin: 15px 15px 10px 15px;
+  color: #222222;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.6;
+  margin: 0 15px 20px 15px;
+}
+
+/* ==========================================
+   技術要求：RWD 響應式斷點（320px、768px、1200px 不破版）
+   ========================================== */
+
+/* 當螢幕小於等於 768px（平板與手機版） */
+@media (max-width: 768px) {
+  /* 隱藏導覽列選單，避免塞不下 */
+  .nav-links {
+    display: none; 
+  }
+  
+  /* 卡片列改為垂直排列，這樣在 768px 和 320px 寬度下才不會擠爛 */
+  .card-row {
+    flex-direction: column; 
+    gap: 20px;
+  }
+  
+  .content-card {
+    flex-basis: auto;            /* 垂直排列時寬度自動撐滿 */
+  }
+}
+
+/* 當螢幕極小（320px 手機版微調） */
+@media (max-width: 320px) {
+  .nav-logo {
+    font-size: 16px;             /* 縮小 Logo 字體 */
+  }
+  .nav-cta {
+    padding: 6px 12px;           /* 縮小按鈕 */
+    font-size: 12px;
+  }
+  .card-title {
+    font-size: 16px;             /* 縮小卡片標題 */
+  }
+}
